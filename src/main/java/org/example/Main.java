@@ -12,7 +12,7 @@ public class Main {
         HashMap<Integer, Integer> hashMap =new HashMap<Integer, Integer>();
 
         for (int i = 1; i <= 5; i++) {
-            hashMap.put(i, (int) Math.random());
+            hashMap.put(i, (int)( Math.random()*100));
         //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
             // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
             System.out.println("i = " + i);
