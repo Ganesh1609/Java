@@ -14,11 +14,14 @@ public class HashMapPractice {
 
         }
         System.out.println(hashMap);
+        /* unique  Word count from string */
         String text = "apple banana apple orange banana apple grape";
-
         String[] words = text.split(" ");
         System.out.println(wordFrequency1(words));
         System.out.println(wordFrequency2(words));
+
+        /* unique  character count from string */
+        System.out.println(charFrequncy(text));
 
     }
 
@@ -41,6 +44,15 @@ public class HashMapPractice {
             wordCount.put(word, wordCount.getOrDefault(word, 0) + 1);
         }
         return wordCount;
+    }
+
+    static HashMap<String, Integer> charFrequncy(String text) {
+        HashMap<String, Integer> charCount = new HashMap<>();
+        String finalString = text.replaceAll(" ", "");
+        for (int i = 0; i < finalString.length(); i++) {
+            charCount.put(String.valueOf(finalString.charAt(i)), charCount.getOrDefault(String.valueOf(finalString.charAt(i)), 0) + 1);
+        }
+        return charCount;
     }
 
 }
