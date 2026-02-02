@@ -91,6 +91,22 @@ public class HashMapPractice {
         System.out.println(map.get("AA").floatValue()); // 1.0
         System.out.println(map.get("AA").intValue()); // 1
 
+        System.out.println();
+        System.out.println("  **********  Compute -> Adds the key+value if not present else update the value if key is already present at the 0th Index ********** ");
+        map.compute("CC", (s, integer) -> 1);
+        System.out.println(map);
+
+        map.compute("DD", (s, integer) -> 4);
+        System.out.println(map);
+
+        map.compute("DD", (s, integer) -> 2);
+        System.out.println(map);
+
+        System.out.println();
+        System.out.println("  **********  ComputeIfPresent  ********** ");
+        map.computeIfPresent("EE", (s, integer) -> integer / 0);
+        System.out.println(map);
+
     }
 
     private static List<String> uniqueInArray(String[] words) {
