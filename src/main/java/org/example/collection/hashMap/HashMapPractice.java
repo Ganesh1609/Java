@@ -1,6 +1,8 @@
 package org.example.collection.hashMap;
 
 import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class HashMapPractice {
     public static void main(String[] args) {
@@ -91,9 +93,25 @@ public class HashMapPractice {
         System.out.println(map.get("AA").floatValue()); // 1.0
         System.out.println(map.get("AA").intValue()); // 1
 
+        System.out.println();
+        System.out.println("  **********  Compute -> Adds the key+value if not present else update the value if key is already present at the 0th Index ********** ");
+        map.compute("CC", (s, integer) -> 1);
+        System.out.println(map);
+
+        map.compute("DD", (s, integer) -> 4);
+        System.out.println(map);
+
+        map.compute("DD", (s, integer) -> 2);
+        System.out.println(map);
+
+        System.out.println();
+        System.out.println("  **********  ComputeIfPresent  ********** ");
+        map.computeIfPresent("EE", (s, integer) -> integer / 0);
+        System.out.println(map);
+
     }
 
-    private static List<String> uniqueInArray(String[] words) {
+    public static List<String> uniqueInArray(String[] words) {
         List<String> list = new ArrayList<>();
         HashMap<String, Integer> hashMap = new HashMap<>();
         for (String s : words) {
@@ -104,7 +122,7 @@ public class HashMapPractice {
         return list;
     }
 
-    private static HashMap<String, Integer> wordFrequency3(String[] words) {
+    public static HashMap<String, Integer> wordFrequency3(String[] words) {
         HashMap<String, Integer> hashMap = new HashMap<>();
 
         for (String w : words) {
@@ -116,7 +134,7 @@ public class HashMapPractice {
 
     }
 
-    private static void LRU() {
+    public static void LRU() {
         LRUCache<Integer, String> cache = new LRUCache<>(1);
         cache.putValue(1, "A");
         cache.putValue(2, "B");
@@ -129,7 +147,7 @@ public class HashMapPractice {
 
     }
 
-    private static List<String> duplicateInArray(String[] words) {
+    public static List<String> duplicateInArray(String[] words) {
         HashMap<String, Integer> hashMap = new HashMap<>();
         for (String word : words) {
             hashMap.put(word, hashMap.getOrDefault(word, 0) + 1);
@@ -146,7 +164,7 @@ public class HashMapPractice {
 
     }
 
-    private static String firstNonRepatingWord(String[] words) {
+    public static String firstNonRepatingWord(String[] words) {
         String word = "";
         HashMap<String, Integer> hashMap = new HashMap<>();
         for (String word1 : words) {
@@ -162,7 +180,7 @@ public class HashMapPractice {
         return word;
     }
 
-    static HashMap<String, Integer> wordFrequency1(String[] words) {
+    public static HashMap<String, Integer> wordFrequency1(String[] words) {
         HashMap<String, Integer> hashMap = new HashMap<>();
         System.out.println(Arrays.toString(words));
         for (String word : words) {
@@ -175,7 +193,7 @@ public class HashMapPractice {
         return hashMap;
     }
 
-    static HashMap<String, Integer> wordFrequency2(String[] words) {
+    public static HashMap<String, Integer> wordFrequency2(String[] words) {
         HashMap<String, Integer> wordCount = new HashMap<>();
         for (String word : words) {
             wordCount.put(word.trim(), wordCount.getOrDefault(word.trim(), 0) + 1);
@@ -183,13 +201,31 @@ public class HashMapPractice {
         return wordCount;
     }
 
-    static HashMap<String, Integer> charFrequncy(String text) {
+    public static HashMap<String, Integer> charFrequncy(String text) {
         HashMap<String, Integer> charCount = new HashMap<>();
         String finalString = text.replaceAll(" ", "").trim();
+        int k = 0;
         for (int i = 0; i < finalString.length(); i++) {
-            charCount.put(String.valueOf(finalString.charAt(i)), charCount.getOrDefault(String.valueOf(finalString.charAt(i)), 0) + 1);
+
+            int j = (charCount.getOrDefault(String.valueOf(finalString.charAt(i)), 0) + 1);
+            k = k + j;
+            charCount.put(String.valueOf(finalString.charAt(i)), j);
         }
+        System.out.println(k);
         return charCount;
+    }
+
+    public static void charFrequncy2(String text) {
+
+        Map<String, Long> result =
+                Arrays.stream(text.toLowerCase().replace(" ", "").split(""))
+                        .collect(Collectors.groupingBy(
+                                Function.identity(),
+                                TreeMap::new,      // alphabetical order
+                                Collectors.counting()
+                        ));
+        result.forEach((k, v) -> System.out.println(k + " = " + v));
+
     }
 
 }
