@@ -1,0 +1,55 @@
+// Primitive Data Types
+/* Integral Numbers :-
+        1. byte.
+            This is the smallest integer type. It’s useful when you are working with a stream of data from
+             a network or file,or when you are very concerned about saving memory in large arrays.
+                 Default value:- 0
+                 Size (Bits) :- 8-bit.
+                 Minimum Value :- -128.
+                 Maximum Value :-  127.
+
+        2. short.
+            short is mostly a vestige of older computer architectures. In modern Java,
+            it’s rarely used because the performance gain over an int is negligible on most systems.
+               Default value:- 0
+               Size (Bits) :- 16-bit.
+               Minimum Value :- -32,768.
+               Maximum Value :-  32,767.
+        3. int.
+                    This is the gold standard. Unless you have a specific reason to do otherwise, use int for whole numbers.
+                    It is large enough for most calculations and is optimized for modern processors.
+                               Default value:- 0
+                               Size (Bits) :- 32-bit.
+                               Minimum Value :- -2( power to -31) (i.e. -2147483648).
+                               Maximum Value :- 2( power to -31) - 1 (~2.1 billion)  (i.e. 2147483647).
+
+
+        4. long.
+                Use this when int isn't big enough (e.g., measuring the distance between stars in kilometers
+                 or tracking world population).
+
+                Note: When assigning a value to a long, you should append an L to
+                the number so Java knows it's a long literal:
+
+                long distance = 9000000000L;
+
+                       Default value:- 0
+                       Size (Bits) :- 64-bit.
+                       Minimum Value :- -2( power to 63) (i.e. -9223372036854775808).
+                       Maximum Value :-  2( power to 63) - 1  (i.e. 9223372036854775807).
+
+
+         */
+
+        /* Decimal Numbers :-
+        1. float.
+        2. double.
+         */
+
+        /* Characters :-
+            1. char
+         */
+
+        /*  Booleans
+            1. booleans.
+         */
