@@ -1,0 +1,79 @@
+1. How does a HashMap work internally in Java ?
+
+Definition :-
+A HashMap in Java works by storing key-value pairs in an array of buckets,
+where each bucket is determined by the key’s hash code.
+Collisions are handled using linked lists or balanced trees (Java 8+),
+ ensuring efficient lookups and updates.
+
+ Internal Structure of HashMap
+ - Bucket Array:
+ Internally, a HashMap maintains an array of Node<K,V> objects (called buckets).
+ class Node<K,V> {
+     final int hash;
+     final K key;
+     V value;
+     Node<K,V> next; // linked list for collisions
+ }
+ - Index Calculation:
+ When you insert a key-value pair, Java computes the index using:
+ index=hashCode(key) &  (n-1) .
+ - where n is the number of buckets (default = 16). This ensures the key is mapped to a specific bucket.
+
+ ⚡ Collision Handling-
+ - Before Java 8: Collisions were resolved using linked lists. Multiple entries with the same index were chained together.
+ - Java 8 and later: If collisions in a bucket exceed a threshold (default 8),
+    the linked list is converted into a balanced tree (Red-Black Tree)
+ . This improves worst-case lookup from O(n) to O(log n).
+
+ 🛠 Key Operations-
+ 1) Insertion (put):
+ - Compute hash of the key.
+ - Find bucket index.
+ - If bucket is empty → insert new node.
+ - If key exists → update value.
+ - If collision → add to linked list/tree.
+
+ 2) Retrieval (get):
+ - Compute hash of the key.
+ - Find bucket index.
+ - Traverse linked list/tree to find matching key using equals().
+
+ 3) Deletion (remove):
+ Similar to retrieval, but removes the node from the chain/tree.
+
+ 📌 Important Details-
+ - Load Factor: Default = 0.75. When the number of entries exceeds capacity × loadFactor, the map resizes (doubles capacity).
+ - Nulls: HashMap allows one null key and multiple null values.
+ - Thread Safety: HashMap is not synchronized. For concurrent use, prefer ConcurrentHashMap.
+ - Key Requirements: Keys must implement consistent hashCode() and equals() methods to avoid incorrect behavior.
+
+
+ 2. 	What happens when two keys have the same hash code?  (Collision handling, chaining, and treeification.
+
+A collision occurs when two different keys produce the same hash code and therefore map to the same bucket index in the HashMap
+
+Collision Handling in HashMap :-
+1. Index Calculation
+    - HashMap computes bucket index as:
+        index=hash(key)\  \& \  (n-1)- If two keys produce the same index, they end up in the same bucket.
+2. Chaining (Linked List)
+    - Before Java 8: collisions were handled by storing entries in a linked list inside the bucket.
+    - If multiple keys land in the same bucket, they are chained together.
+    - Lookup requires traversing the list and comparing keys using equals().
+ 3. Treeification (Balanced Tree)
+    - Since Java 8: if the number of entries in a single bucket exceeds a threshold (default = 8), the linked list is converted into a Red-Black Tree.
+    - This reduces worst-case lookup from O(n) to O(log n).
+    - If the bucket size later shrinks below a threshold (default = 6), it is converted back to a linked list.
+ 4.  Key Comparison
+    - Even if two keys have the same hash code, they are considered equal only if equals() returns true.
+    - If equals() returns false, both keys coexist in the same bucket (different nodes).
+
+    🛠 Example
+    Map<String, Integer> map = new HashMap<>();
+    map.put("FB", 1);   // "FB".hashCode() == 2236
+    map.put("Ea", 2);   // "Ea".hashCode() == 2236
+
+    System.out.println(map);
+    // Output: {FB=1, Ea=2}
+    Here, "FB" and "Ea" have the same hash code but are not equal, so both entries are stored in the same bucket.
