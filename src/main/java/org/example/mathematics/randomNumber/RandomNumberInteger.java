@@ -33,21 +33,28 @@ public class RandomNumberInteger {
         System.out.println("Random number With Math.random(): " + numberFromMathRandom);
 
         /*
-        *To Generate Integer in a Specific Range
-        *Example: Integer between 50 and 100
-        *
-        * */
+         *To Generate Integer in a Specific Range
+         *Example: Integer between 50 and 100
+         *
+         * */
         int min = 50;
         int max = 1000;
-        final double amount= Math.random();
-        System.out.println("amount "+amount);
-        System.out.println("Random number With Math.random() with specific range: " + (int)(amount * (max )));
-        System.out.println("Random number With Math.random() with specific range: " + (int)(amount * (max-min )));
-        System.out.println("Random number With Math.random() with specific range: " + (int)(amount * (max -min+1)));
-        System.out.println("Random number With Math.random() with specific range: " + (int)(amount * (max -min+1))+min);
+        final double amount = Math.random();
+        System.out.println("amount " + amount);
+        System.out.println("Random number With Math.random() with specific range: " + (int) (amount * (max)));
+        System.out.println("Random number With Math.random() with specific range: " + (int) (amount * (max - min)));
+        System.out.println("Random number With Math.random() with specific range: " + (int) (amount * (max - min + 1)));
+        System.out.println("Random number With Math.random() with specific range: " + (int) (amount * (max - min + 1)) + min);
 
-        int randomNumberWithRange = (int)( amount * (max - min + 1)) + min;
+        int randomNumberWithRange = (int) (amount * (max - min + 1)) + min;
         System.out.println("Final Random number With Math.random() with specific range: " + randomNumberWithRange);
+/*
+Feature        |	Math.random()    |	Random class
+Type	       |    Static method	 |  Requires object (new Random())
+Returns	       |    double           |	Various types (int, long, etc.)
+Custom Seed    |	❌ No	         |  ✅ Yes
+Range Handling | 	Manual (via math)| Built-in (i.e -2,147,483,648 to 2,147,483,647)
 
+ */
     }
 }
