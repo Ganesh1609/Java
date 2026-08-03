@@ -16,7 +16,7 @@ public class MainStream {
                 new Employee("Manish", "SD", 200000),
                 new Employee("Dinesh", "Support", 45000),
                 new Employee("Amol", "SD", 20000),
-                new Employee("Ganesh", "SD", 43000)
+                new Employee("Ganesh", "SD", 43002)
 
         );
         mainStream.findFirstEmployeeWhoesSalaryGreaterThan50000(employees);
@@ -26,6 +26,8 @@ public class MainStream {
         mainStream.finAvgSalaryDepartmentWise(employees);
         mainStream.findHighestSalaryEachDepartment(employees);
         mainStream.commaSperatedEmployeeNames(employees);
+        mainStream.allEmployeeNamesWithFastOperation(employees);
+        mainStream.totalSalaryOfEmployeesWithFastOperation(employees);
 
         System.out.println("************* Categories **********");
 
@@ -43,6 +45,22 @@ public class MainStream {
 
         );
         mainStream.findTotalAmountTransactionWise(transactionList);
+    }
+
+    private void totalSalaryOfEmployeesWithFastOperation(List<Employee> employees) {
+        System.out.println("Total Salary Of Employees With Fast Operation:");
+        Integer reduce = employees.parallelStream()
+                .map(e->e.getSalary())
+                .reduce((a, b) -> a + b).orElseGet(()->0);
+        System.out.println(reduce);
+
+    }
+
+    private void allEmployeeNamesWithFastOperation(List<Employee> employees) {
+        System.out.println("************* Employee Names ************");
+        employees.parallelStream()
+                .map((e) -> e.getName())
+                .forEach(System.out::println);
     }
 
     private void commaSperatedEmployeeNames(List<Employee> employees) {
