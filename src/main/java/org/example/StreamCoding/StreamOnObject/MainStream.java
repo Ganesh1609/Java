@@ -25,6 +25,7 @@ public class MainStream {
         mainStream.countEmployeeDepartmentWise(employees);
         mainStream.finAvgSalaryDepartmentWise(employees);
         mainStream.findHighestSalaryEachDepartment(employees);
+        mainStream.commaSperatedEmployeeNames(employees);
 
         System.out.println("************* Categories **********");
 
@@ -42,6 +43,12 @@ public class MainStream {
 
         );
         mainStream.findTotalAmountTransactionWise(transactionList);
+    }
+
+    private void commaSperatedEmployeeNames(List<Employee> employees) {
+        String collect = employees.stream().map(e -> e.getName())
+                .collect(Collectors.joining(","));
+        System.out.println(collect);
     }
 
     private void findHighestSalaryEachDepartment(List<Employee> employees) {
